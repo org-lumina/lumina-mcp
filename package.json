@@ -1,0 +1,50 @@
+{
+  "name": "@lumina-org/mcp-server",
+  "version": "0.1.0",
+  "description": "Official Model Context Protocol (MCP) server for Lumina Protocol — parametric crypto insurance for AI agents on Base.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "lumina-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "claude_desktop_config.json"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "lumina",
+    "defi",
+    "insurance",
+    "parametric-insurance",
+    "ai-agent",
+    "base",
+    "claude"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@lumina-org/sdk": "^0.7.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "ethers": "^6.13.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.0"
+  }
+}

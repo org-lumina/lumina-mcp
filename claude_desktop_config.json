@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "lumina": {
+      "command": "npx",
+      "args": ["-y", "@lumina-org/mcp-server"],
+      "env": {
+        "LUMINA_API_KEY": "lk_optional_only_for_wallet_scoped_reads"
+      }
+    }
+  }
+}
