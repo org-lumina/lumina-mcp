@@ -7,7 +7,7 @@ import { jsonResult, errorResult } from "../lib/format.js";
 /** Best-effort on-chain LUMINA price ($, 18-dec) via BondVault.priceOracle().getLuminaPrice(). */
 async function tryLuminaPrice(bondVault: string): Promise<string | null> {
   try {
-    const rpc = process.env.LUMINA_RPC_URL ?? "https://sepolia.base.org";
+    const rpc = process.env.LUMINA_RPC_URL ?? "https://mainnet.base.org";
     const provider = new ethers.JsonRpcProvider(rpc);
     const bv = new ethers.Contract(bondVault, ["function priceOracle() view returns (address)"], provider);
     const oracleAddr: string = await bv.priceOracle();

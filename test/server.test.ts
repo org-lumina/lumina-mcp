@@ -41,7 +41,7 @@ function fakeFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Respon
   if (url.endsWith("/health"))
     return json({
       version: "0.1.0",
-      chain: { chainId: 84532, block: 42000000 },
+      chain: { chainId: 8453, block: 46608500 },
       relayer: { address: "0x" + "11".repeat(20), balanceWei: "200000000000000000" },
       contracts: {
         coverRouter: "0x" + "c0".repeat(20),
@@ -136,7 +136,7 @@ describe("tools", () => {
     const out = JSON.parse(text(r));
     expect(out.unsignedTransactions).toHaveLength(2);
     expect(out.unsignedTransactions[0].data).toMatch(/^0x[0-9a-f]+$/);
-    expect(out.unsignedTransactions[0].chainId).toBe(84532);
+    expect(out.unsignedTransactions[0].chainId).toBe(8453);
   });
 
   it("redeem_bond returns one unsigned tx", async () => {
@@ -152,7 +152,7 @@ describe("tools", () => {
   it("get_protocol_stats degrades gracefully when price RPC fails", async () => {
     const r = await client.callTool({ name: "get_protocol_stats", arguments: {} });
     const out = JSON.parse(text(r));
-    expect(out.chain.chainId).toBe(84532);
+    expect(out.chain.chainId).toBe(8453);
     expect(out.products.active).toBe(1);
     expect(typeof out.luminaPriceUsd).toBe("string");
   });
