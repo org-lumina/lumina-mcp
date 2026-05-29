@@ -11,8 +11,11 @@ agent can browse insurance products, quote premiums, and **buy a policy in one
 sentence** — starting with a zero-friction sandbox that needs **no wallet, no
 gas, and no API key**.
 
-> **Testnet:** defaults to Base Sepolia (chainId 84532) with mock USDC. Nothing
-> here moves real funds.
+> **Mainnet:** LIVE on Base mainnet (chainId 8453) since 2026-05-28 with
+> Circle USDC. **Real funds are at risk** on the production path. A separate
+> Base Sepolia sandbox (`buy_policy_sandbox` tool) runs on chain 84532 with
+> mock USDC for zero-risk exploration — opt in by setting
+> `LUMINA_CHAIN_ID=84532` + `LUMINA_RPC_URL=https://sepolia.base.org`.
 
 ---
 
@@ -61,14 +64,33 @@ lumina-mcp                              # runs on stdio
 
 ## Configuration (env vars — all optional)
 
+### Mainnet (production — default)
+
 | Var | Default | Purpose |
 |-----|---------|---------|
-| `LUMINA_API_BASE` | public testnet API | Lumina REST API base URL |
-| `LUMINA_CHAIN_ID` | `84532` | EVM chain id (Base Sepolia) |
+| `LUMINA_API_BASE` | `https://lumina-api-production-ac85.up.railway.app` | Lumina REST API base URL |
+| `LUMINA_CHAIN_ID` | `8453` | EVM chain id (Base mainnet) |
 | `LUMINA_API_KEY` | — | `lk_…` key for wallet-scoped reads (policies/bonds). [Get one](https://www.lumina-org.com/app/agent/api-keys) |
-| `LUMINA_RPC_URL` | `https://sepolia.base.org` | RPC for the on-chain LUMINA price read |
+| `LUMINA_RPC_URL` | `https://mainnet.base.org` | RPC for the on-chain LUMINA price read |
+| `LUMINA_EXPLORER` | `https://basescan.org` | Block explorer base for surfacing tx links |
 
 The sandbox / quote / products / stats paths need **no key**.
+
+### Sandbox (testnet — for development/exploration only)
+
+Opt into the Base Sepolia sandbox by overriding the chain + RPC defaults.
+**Sandbox uses mock USDC (`mUSDC` at `0xD944d8e5D8329994D83950872Ec210891d3Ab6AE`)
+with no real value.** It exists to let AI agents exercise the full purchase →
+trigger → bond → redeem flow without funds at risk.
+
+```bash
+export LUMINA_CHAIN_ID=84532
+export LUMINA_RPC_URL=https://sepolia.base.org
+export LUMINA_EXPLORER=https://sepolia.basescan.org
+```
+
+The `buy_policy_sandbox` tool always routes through the testnet sandbox
+regardless of `LUMINA_CHAIN_ID` (it hits the API's `/sandbox/try` endpoint).
 
 ---
 
